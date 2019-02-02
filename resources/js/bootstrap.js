@@ -52,5 +52,15 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '2f7b7177cc5b521c6c73',
     cluster: 'ap2',
+    client: client,
     encrypted: true
+});
+
+//import Echo from "laravel-echo"
+
+window.io = require('socket.io-client');
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
 });

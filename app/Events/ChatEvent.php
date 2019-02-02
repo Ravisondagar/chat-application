@@ -11,6 +11,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\User;
 use Pusher\Pusher;
+use Auth;
 
 class ChatEvent implements ShouldBroadcast
 {
@@ -24,7 +25,7 @@ class ChatEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($message,User $user)
+    public function __construct($message,$user)
     {
         return $this->message = $message;
         return $this->user = $user;
@@ -37,6 +38,14 @@ class ChatEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat');
+        
+        return new Channel('chat'.Auth::user()->id);
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'message' => $this->message,
+        ];
     }
 }

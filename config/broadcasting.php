@@ -37,9 +37,11 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('ap2'),
-                'encrypted' => false,
+                'encrypted' => true,
+                'useTLS' => true,
             ],
         ],
+        
 
         'redis' => [
             'driver' => 'redis',

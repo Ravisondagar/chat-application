@@ -27,5 +27,21 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{!! asset('js/app.js') !!}"></script>
+	<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+    <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('18035712f08e65bb823d', {
+      cluster: 'ap2',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
 </body>
 </html>
